@@ -4,6 +4,8 @@ import Unlock from "@/assets/Unlock";
 import { example_db } from "@/assets/example_db";
 
 const App = () => {
+  const [active, setActive] = useState("todos");
+
   const Saldo = ({ letra, lock, date }) => {
     return (
       <div className=" grid grid-cols-4 border-b py-2 px-5 border-[#F1F0F1] items-center">
@@ -49,10 +51,46 @@ const App = () => {
   };
 
   return (
-    <main className=" min-h-screen">
-      <section className=" grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-y-10 pageSize my-10">
+    <main className=" min-h-screen ">
+      <section className=" w-full gap-3 mt-10 text-sm overflow-x-auto flex">
+        <div className="flex gap-4 mx-auto text-center">
+          <div
+            onClick={() => {
+              setActive("todos");
+            }}
+            className={`scroll_item  text-white w-[100px] py-2 rounded-sm cursor-pointer ${
+              active === "todos"
+                ? "bg-[#0F83F9]"
+                : "bg-[#d4d4d4] hover:bg-[#0F83F9] transition-all"
+            }`}
+          >
+            Todos
+          </div>
+          {example_db.map((item, index) => (
+            <div
+              onClick={() => {
+                setActive(item.key);
+              }}
+              key={index}
+              className={`scroll_item  text-white w-[100px] py-2 rounded-sm cursor-pointer ${
+                active === item.key
+                  ? "bg-[#0F83F9]"
+                  : "bg-[#d4d4d4] hover:bg-[#0F83F9] transition-all"
+              }`}
+            >
+              Cuota #{item.key}
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className=" grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-y-8 pageSize my-10">
         {example_db.map((item, index) => (
-          <div key={index} className="w-[400px] text-sm font-medium mx-auto">
+          <div
+            key={index}
+            className={`sm:w-[400px] w-screen text-sm font-medium mx-auto ${
+              active === item.key || active === "todos" ? "" : "hidden"
+            }`}
+          >
             <h1 className=" py-2">Saldo 50y6 - Nº{item.key}</h1>
             {item.saldo.map((i, index) => (
               <div key={index} className="bg-white">
