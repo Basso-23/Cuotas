@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Lock from "@/assets/Lock";
 import Unlock from "@/assets/Unlock";
+import { example_db } from "@/assets/example_db";
 
 const App = () => {
   const Saldo = ({ letra, lock, date }) => {
@@ -35,34 +36,41 @@ const App = () => {
           15-04-2024
         </div>
 
-        <div className=" justify-end flex">$24.77</div>
+        <div className=" justify-end flex items-center">
+          $24.77
+          {/*//*  <div className=" absolute mr-[-65px] bg-white py-[14px] px-[8px] flex gap-[3px] justify-center border border-[#F1F0F1] rounded-sm">
+            <div className=" w-1 h-1 rounded-full bg-[#8C8D8C]"></div>
+            <div className=" w-1 h-1 rounded-full bg-[#8C8D8C]"></div>
+            <div className=" w-1 h-1 rounded-full bg-[#8C8D8C]"></div>
+          </div> */}
+        </div>
       </div>
     );
   };
 
   return (
-    <main className="min-h-screen flex flex-col">
-      <section className="m-auto w-[400px] text-sm font-medium">
-        <h1 className=" py-2">Saldo 50y6</h1>
-        <div className="bg-white shadow-md">
-          <Saldo letra={"1"} lock={"lock"} date={"red"} />
-          <Saldo letra={"2"} lock={"unlock"} date={"green"} />
-          <Saldo letra={"3"} lock={"lock"} date={"red"} />
-          <Saldo letra={"4"} lock={"unlock"} date={"green"} />
-          <Saldo letra={"5"} lock={"lock"} date={"red"} />
-          <Saldo letra={"6"} lock={"lock"} date={"red"} />
-          <Saldo letra={"7"} lock={"unlock"} date={"green"} />
-        </div>
-        <div className=" grid grid-cols-2 bg-white border-b ">
-          <div className="py-2 px-5">Subtotal</div>
-          <div className="py-2 px-5 text-right">$198.16</div>
-          <div className="py-2 px-5">ITBMS</div>
-          <div className="py-2 px-5 text-right">$13.87</div>
-        </div>
-        <div className=" grid grid-cols-2 bg-white text-xl font-bold ">
-          <div className="py-2 px-5">Total</div>
-          <div className="py-2 px-5 text-right">$212.03</div>
-        </div>
+    <main className=" min-h-screen">
+      <section className=" grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-y-10 pageSize my-10">
+        {example_db.map((item, index) => (
+          <div key={index} className="w-[400px] text-sm font-medium mx-auto">
+            <h1 className=" py-2">Saldo 50y6 - Nº{item.key}</h1>
+            {item.saldo.map((i, index) => (
+              <div key={index} className="bg-white">
+                <Saldo letra={i.key} lock={i.lock} date={i.date} />
+              </div>
+            ))}
+            <div className=" grid grid-cols-2 bg-white border-b ">
+              <div className="py-2 px-5">Subtotal</div>
+              <div className="py-2 px-5 text-right">$198.16</div>
+              <div className="py-2 px-5">ITBMS</div>
+              <div className="py-2 px-5 text-right">$13.87</div>
+            </div>
+            <div className=" grid grid-cols-2 bg-white text-xl font-bold ">
+              <div className="py-2 px-5">Total</div>
+              <div className="py-2 px-5 text-right">$212.03</div>
+            </div>
+          </div>
+        ))}
       </section>
     </main>
   );
