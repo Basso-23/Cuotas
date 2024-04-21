@@ -52,13 +52,13 @@ const App = () => {
 
   return (
     <main className=" min-h-screen ">
-      <section className=" w-full gap-3 mt-10 text-sm overflow-x-auto flex">
+      <section className=" w-full gap-3 mt-0 text-sm overflow-x-auto flex">
         <div className="flex gap-4 mx-auto text-center">
           <div
             onClick={() => {
               setActive("todos");
             }}
-            className={`scroll_item  text-white w-[100px] py-2 rounded-sm cursor-pointer ${
+            className={`scroll_item  text-white w-[100px] py-2 rounded-bl-sm rounded-br-sm  cursor-pointer ${
               active === "todos"
                 ? "bg-[#0F83F9]"
                 : "bg-[#d4d4d4] hover:bg-[#0F83F9] transition-all"
@@ -72,7 +72,7 @@ const App = () => {
                 setActive(item.key);
               }}
               key={index}
-              className={`scroll_item  text-white w-[100px] py-2 rounded-sm cursor-pointer ${
+              className={`scroll_item  text-white w-[100px] py-2 rounded-bl-sm rounded-br-sm cursor-pointer ${
                 active === item.key
                   ? "bg-[#0F83F9]"
                   : "bg-[#d4d4d4] hover:bg-[#0F83F9] transition-all"
